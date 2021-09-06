@@ -5,6 +5,14 @@
  */
 package view;
 
+import controller.dao.DAOEmployee;
+import controller.utils.ConnectionUtils;
+import java.sql.SQLException;
+import java.util.Arrays;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import model.Employee;
+
 /**
  *
  * @author Ronin
@@ -14,8 +22,18 @@ public class EmployeePanel extends javax.swing.JPanel {
     /**
      * Creates new form Employee
      */
-    public EmployeePanel() {
+    private DefaultTableModel model;
+    private List<Employee> list_Employee;
+    DAOEmployee db = new DAOEmployee(ConnectionUtils.getMyConnection());
+    
+    public EmployeePanel() throws SQLException, ClassNotFoundException {
         initComponents();
+        model = (DefaultTableModel) jTable1.getModel();
+        list_Employee =  Arrays.asList(db.selectAll());
+        for (Employee employee : list_Employee) {
+            model.addRow(employee.toObjects());
+        }
+        
     }
 
     /**
@@ -27,19 +45,38 @@ public class EmployeePanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "No", "Name", "Job", "Salary"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 290, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 15, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }

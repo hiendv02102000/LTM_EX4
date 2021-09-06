@@ -6,124 +6,131 @@ import java.util.Date;
 
 /**
  * The persistent class for the EMPLOYEE database table.
- * 
+ *
  */
 public class Employee implements Serializable {
-	private static final long serialVersionUID = 1L;
 
-	public Employee(int empId,  String empName, String empNo, Date hireDate, byte[] image, String job,
-			float salary,int deptId,BigInteger mngId) {
-		super();
-		this.empId = empId;
-		this.deptId = deptId;
-		this.empName = empName;
-		this.empNo = empNo;
-		this.hireDate = hireDate;
-		this.image = image;
-		this.job = job;
-		this.mngId = mngId;
-		this.salary = salary;
-	}
+    private static final long serialVersionUID = 1L;
 
-	private int empId;
+    public Employee(int empId, String empName, String empNo, Date hireDate, byte[] image, String job,
+            float salary, int deptId, BigInteger mngId) {
+        super();
+        this.empId = empId;
+        this.deptId = deptId;
+        this.empName = empName;
+        this.empNo = empNo;
+        this.hireDate = hireDate;
+        this.image = image;
+        this.job = job;
+        this.mngId = mngId;
+        this.salary = salary;
+    }
 
-	private int deptId;
+    private int empId;
 
-	private String empName;
+    private int deptId;
 
-	private String empNo;
+    private String empName;
 
-	private Date hireDate;
+    private String empNo;
 
-	private byte[] image;
+    private Date hireDate;
 
-	private String job;
+    private byte[] image;
 
-	private java.math.BigInteger mngId;
+    private String job;
 
-	private float salary;
+    private java.math.BigInteger mngId;
 
-	public Employee() {
-	}
+    private float salary;
 
-	public int getEmpId() {
-		return this.empId;
-	}
+    public Employee() {
+    }
 
-	public void setEmpId(int empId) {
-		this.empId = empId;
-	}
+    public int getEmpId() {
+        return this.empId;
+    }
 
-	public int getDeptId() {
-		return this.deptId;
-	}
+    public void setEmpId(int empId) {
+        this.empId = empId;
+    }
 
-	public void setDeptId(int deptId) {
-		this.deptId = deptId;
-	}
+    public int getDeptId() {
+        return this.deptId;
+    }
 
-	public String getEmpName() {
-		return this.empName;
-	}
+    public void setDeptId(int deptId) {
+        this.deptId = deptId;
+    }
 
-	public void setEmpName(String empName) {
-		this.empName = empName;
-	}
+    public String getEmpName() {
+        return this.empName;
+    }
 
-	public String getEmpNo() {
-		return this.empNo;
-	}
+    public void setEmpName(String empName) {
+        this.empName = empName;
+    }
 
-	public void setEmpNo(String empNo) {
-		this.empNo = empNo;
-	}
+    public String getEmpNo() {
+        return this.empNo;
+    }
 
-	public Date getHireDate() {
-		return this.hireDate;
-	}
+    public void setEmpNo(String empNo) {
+        this.empNo = empNo;
+    }
 
-	public void setHireDate(Date hireDate) {
-		this.hireDate = hireDate;
-	}
+    public Date getHireDate() {
+        return this.hireDate;
+    }
 
-	public byte[] getImage() {
-		return this.image;
-	}
+    public void setHireDate(Date hireDate) {
+        this.hireDate = hireDate;
+    }
 
-	public void setImage(byte[] image) {
-		this.image = image;
-	}
+    public byte[] getImage() {
+        return this.image;
+    }
 
-	public String getJob() {
-		return this.job;
-	}
+    public void setImage(byte[] image) {
+        this.image = image;
+    }
 
-	public void setJob(String job) {
-		this.job = job;
-	}
+    public String getJob() {
+        return this.job;
+    }
 
-	public java.math.BigInteger getMngId() {
-		return this.mngId;
-	}
+    public void setJob(String job) {
+        this.job = job;
+    }
 
-	public void setMngId(java.math.BigInteger mngId) {
-		this.mngId = mngId;
-	}
+    public java.math.BigInteger getMngId() {
+        return this.mngId;
+    }
 
-	public float getSalary() {
-		return this.salary;
-	}
+    public void setMngId(java.math.BigInteger mngId) {
+        this.mngId = mngId;
+    }
 
-	public void setSalary(float salary) {
-		this.salary = salary;
-	}
+    public float getSalary() {
+        return this.salary;
+    }
 
-	@Override
-	public String toString() {
-		String str = "empId: " + this.empId + "\n" + "deptId: " + this.deptId + "\n" + "empName: " + this.empName + "\n"
-				+ "empNo: " + this.empNo + "\n" + "hireDate: " + this.hireDate.toString() +"\n" + "job: " + this.job +"\n"+ "mngId:"
-				+ this.mngId +"\n"+ "salary: " + this.salary;
-		return str;
-	}
+    public void setSalary(float salary) {
+        this.salary = salary;
+    }
+
+    @Override
+    public String toString() {
+        String str = "empId: " + this.empId + "\n" + "deptId: " + this.deptId + "\n" + "empName: " + this.empName + "\n"
+                + "empNo: " + this.empNo + "\n" + "hireDate: " + this.hireDate.toString() + "\n" + "job: " + this.job + "\n" + "mngId:"
+                + this.mngId + "\n" + "salary: " + this.salary;
+        return str;
+    }
+
+    public Object[] toObjects() {
+        return new Object[]{
+            empNo, empName, job, salary
+        };
+    }
 
 }

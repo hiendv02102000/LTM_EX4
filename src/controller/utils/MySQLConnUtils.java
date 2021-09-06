@@ -21,10 +21,7 @@ public class MySQLConnUtils {
  public static Connection getMySQLConnection(String hostName, String dbName,
          String userName, String password) throws SQLException,
          ClassNotFoundException {
-     // Khai báo class Driver cho DB MySQL
-     // Việc này cần thiết với Java 5
-     // Java6 tự động tìm kiếm Driver thích hợp.
-     // Nếu bạn dùng Java6, thì ko cần dòng này cũng được.
+
      Class.forName("com.mysql.cj.jdbc.Driver");
  
      // Cấu trúc URL Connection dành cho Oracle

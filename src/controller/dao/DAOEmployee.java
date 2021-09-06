@@ -24,7 +24,7 @@ public class DAOEmployee extends IDAO<Employee> {
 		Vector<Employee> ee = new Vector<Employee>();
 		Employee[] result;
 		try {
-			String sql = "Select * from Employee";
+			String sql = "Select * from EMPLOYEE";
 
 			rs = statement.executeQuery(sql);
 			int i = 0;
@@ -58,7 +58,7 @@ public class DAOEmployee extends IDAO<Employee> {
 		Vector<Employee> ee = new Vector<Employee>();
 		Employee[] result;
 		try {
-			String sql = "Select * from Employee where Emp_Name='" + name+"'" ;
+			String sql = "Select * from EMPLOYEE where Emp_Name='" + name+"'" ;
 
 			rs = statement.executeQuery(sql);
 			int i = 0;
