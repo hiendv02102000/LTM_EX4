@@ -28,9 +28,9 @@ public class EmployeeControl {
             System.exit(0);
         }
         getAll();
-//        view.getjButton1().addActionListener((ActionEvent ae) -> {
-//            
-//        });
+        view.getjButton1().addActionListener((ActionEvent ae) -> {
+            
+        });
     }
     
     public void getAll() {

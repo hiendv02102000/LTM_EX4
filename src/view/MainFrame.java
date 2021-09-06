@@ -20,12 +20,15 @@ public class MainFrame extends javax.swing.JFrame {
     
     private TimeKeeperPanel timeKeeperPanel;
     private EmployeePanel employeePanel;
+    private DepartmentPanel departmentPanel;
     public MainFrame() throws SQLException, ClassNotFoundException {
         initComponents();
+        departmentPanel = new DepartmentPanel();
         timeKeeperPanel = new TimeKeeperPanel();
-        jTabbedPane1.add(timeKeeperPanel);
         employeePanel = new EmployeePanel();
-        jTabbedPane1.add(employeePanel);
+        jTabbedPane1.add("Phòng ban",departmentPanel);
+        jTabbedPane1.add("Nhân viên",employeePanel);
+        jTabbedPane1.add("Thời gian làm việc",timeKeeperPanel);
         
         
     }
@@ -38,6 +41,9 @@ public class MainFrame extends javax.swing.JFrame {
         return timeKeeperPanel;
     }
 
+    public DepartmentPanel getDepartmentPanell() {
+        return departmentPanel;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
