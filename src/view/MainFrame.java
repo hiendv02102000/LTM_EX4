@@ -18,12 +18,24 @@ public class MainFrame extends javax.swing.JFrame {
     /**
      * Creates new form MainFrame
      */
+<<<<<<< HEAD
     public MainFrame() throws SQLException, ClassNotFoundException {
+=======
+    
+    private TimeKeeperPanel timeKeeperPanel;
+    public MainFrame() {
+>>>>>>> 73cebacf323fcde1a34cb276c9baebbae9dea718
         initComponents();
+        setLocationRelativeTo(null);
+        timeKeeperPanel = new TimeKeeperPanel();
         jTabbedPane1.add("Phòng ban", new DepartmentPanel());
         jTabbedPane1.add("Nhân viên", new EmployeePanel());
-        jTabbedPane1.add("Thời gian làm", new TimeKeeperPanel());
+        jTabbedPane1.add("Thời gian làm", timeKeeperPanel);
         
+    }
+
+    public TimeKeeperPanel getTimeKeeperPanel() {
+        return timeKeeperPanel;
     }
 
     /**
@@ -53,6 +65,7 @@ public class MainFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+<<<<<<< HEAD
     /**
      * @param args the command line arguments
      */
@@ -94,6 +107,8 @@ public class MainFrame extends javax.swing.JFrame {
         });
     }
 
+=======
+>>>>>>> 73cebacf323fcde1a34cb276c9baebbae9dea718
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTabbedPane jTabbedPane1;
     // End of variables declaration//GEN-END:variables
