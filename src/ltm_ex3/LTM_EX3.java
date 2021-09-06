@@ -5,7 +5,7 @@
  */
 package ltm_ex3;
 
-import com.mysql.jdbc.Connection;
+import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -23,26 +23,24 @@ public class LTM_EX3 {
         String host = "20.198.248.201";
         String dbName = "contactdb";
         int port = 3306;
-        String mysqlURL ="jdbc:mysql:"+host +":"+ port + "/" +dbName;
-        
+        String mysqlURL = "jdbc:mysql://" + host + ":3306/" + dbName;
+
         String username = "tmpuser";
         String password = "tmpuser@123";
 
         String dbClass = "com.mysql.jdbc.Driver";
         try {
-             Class.forName(dbClass);
+            Class.forName(dbClass);
         } catch (ClassNotFoundException cnfe) {
             System.out.println("Error loading driver: " + cnfe);
         }
-        Connection connection = (Connection) DriverManager.getConnection(mysqlURL,username, password);
- 
-        
+        Connection connection = (Connection) DriverManager.getConnection(mysqlURL, username, password);
+
         Statement statement = connection.createStatement();
         connection.close();
         System.err.println("Hello world" + "hello work" + "wwww");
-       
-        
+
         System.out.println("hiii");
     }
-    
+
 }
