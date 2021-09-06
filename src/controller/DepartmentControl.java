@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ltm_ex3;
+package controller;
 
 import java.util.ArrayList;
 import model.Department;
@@ -13,7 +13,7 @@ import view.DepartmentPanel;
  *
  * @author toank
  */
-public class DepartmentControl extends DepartmenControl {
+public class DepartmentControl {
 
     public DepartmentControl(DepartmentPanel departmentPanell, ArrayList<Department> arrayList) {
     }

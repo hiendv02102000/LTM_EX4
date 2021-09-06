@@ -5,6 +5,7 @@
  */
 package ltm_ex3;
 
+import controller.DepartmentControl;
 import controller.EmployeeControl;
 import controller.TimeKeeperControl;
 import java.sql.SQLException;
@@ -37,7 +38,7 @@ public class LTM_EX3 {
         }
         
         MainFrame frame = new MainFrame();
-        DepartmenControl department = new DepartmentControl(frame.getDepartmentPanell(), new ArrayList<Department>());
+        DepartmentControl department = new DepartmentControl(frame.getDepartmentPanell(), new ArrayList<Department>());
         EmployeeControl empControl = new EmployeeControl(frame.getEmployeePanel(), new ArrayList<Employee>());
         TimeKeeperControl control = new TimeKeeperControl(frame.getTimeKeeperPanel(), new ArrayList<Timekeeper>());
         java.awt.EventQueue.invokeLater(() -> {

@@ -6,6 +6,7 @@
 package view;
 
 import java.sql.SQLException;
+import javax.swing.JFrame;
 
 /**
  *
@@ -23,6 +24,8 @@ public class MainFrame extends javax.swing.JFrame {
     private DepartmentPanel departmentPanel;
     public MainFrame() throws SQLException, ClassNotFoundException {
         initComponents();
+        setLocationRelativeTo(null);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         departmentPanel = new DepartmentPanel();
         timeKeeperPanel = new TimeKeeperPanel();
         employeePanel = new EmployeePanel();
