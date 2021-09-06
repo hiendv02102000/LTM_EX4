@@ -5,6 +5,11 @@
  */
 package ltm_ex3;
 
+import com.mysql.jdbc.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+
 /**
  *
  * @author toank
@@ -14,7 +19,17 @@ public class LTM_EX3 {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
+        String host = "20.198.248.201";
+        String dbName = "contactdb";
+        int port = 3306;
+        String mysqlURL ="jdbc:mysql:"+host +":"+ port + "/" +dbName;
+        
+        String username = "tmpuser";
+        String password = "tmpuser@123";
+        Connection connection = (Connection) DriverManager.getConnection(mysqlURL,username, password);
+        Statement statement = connection.createStatement();
+        
         System.err.println("Hello world" + "hello work" + "wwww");
     }
     
