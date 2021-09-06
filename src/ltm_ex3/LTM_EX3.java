@@ -27,10 +27,21 @@ public class LTM_EX3 {
         
         String username = "tmpuser";
         String password = "tmpuser@123";
+
+        String dbClass = "com.mysql.jdbc.Driver";
+        try {
+             Class.forName(dbClass);
+        } catch (ClassNotFoundException cnfe) {
+            System.out.println("Error loading driver: " + cnfe);
+        }
         Connection connection = (Connection) DriverManager.getConnection(mysqlURL,username, password);
-        Statement statement = connection.createStatement();
+ 
         
+        Statement statement = connection.createStatement();
+        connection.close();
         System.err.println("Hello world" + "hello work" + "wwww");
+       
+        
         System.out.println("hiii");
     }
     
