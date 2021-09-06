@@ -5,19 +5,22 @@
  */
 package ltm_ex3;
 
+import controller.EmployeeControl;
 import controller.TimeKeeperControl;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.UnsupportedLookAndFeelException;
+import model.Employee;
 import model.Timekeeper;
 import view.MainFrame;
 
 public class LTM_EX3 {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException, ClassNotFoundException {
         try {
             for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
                 if ("Windows".equals(info.getName())) {
@@ -33,6 +36,7 @@ public class LTM_EX3 {
         }
         
         MainFrame frame = new MainFrame();
+        EmployeeControl empControl = new EmployeeControl(frame.getEmployeePanel(), new ArrayList<Employee>());
         TimeKeeperControl control = new TimeKeeperControl(frame.getTimeKeeperPanel(), new ArrayList<Timekeeper>());
         java.awt.EventQueue.invokeLater(() -> {
             frame.setVisible(true);

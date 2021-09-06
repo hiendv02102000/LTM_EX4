@@ -35,9 +35,9 @@ public class TimeKeeperControl {
             this.dao.closeConnection();
             System.exit(0);
         }
-        view.getBtnAdd().addActionListener((ActionEvent ae) -> {
-            getAll();
-        });
+//        view.getBtnAdd().addActionListener((ActionEvent ae) -> {
+//            getAll();
+//        });
     }
     
     public void getAll() {

@@ -6,8 +6,6 @@
 package view;
 
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -18,22 +16,24 @@ public class MainFrame extends javax.swing.JFrame {
     /**
      * Creates new form MainFrame
      */
-<<<<<<< HEAD
-    public MainFrame() throws SQLException, ClassNotFoundException {
-=======
+
     
     private TimeKeeperPanel timeKeeperPanel;
-    public MainFrame() {
->>>>>>> 73cebacf323fcde1a34cb276c9baebbae9dea718
+    private EmployeePanel employeePanel;
+    public MainFrame() throws SQLException, ClassNotFoundException {
         initComponents();
-        setLocationRelativeTo(null);
         timeKeeperPanel = new TimeKeeperPanel();
-        jTabbedPane1.add("Phòng ban", new DepartmentPanel());
-        jTabbedPane1.add("Nhân viên", new EmployeePanel());
-        jTabbedPane1.add("Thời gian làm", timeKeeperPanel);
+        jTabbedPane1.add(timeKeeperPanel);
+        employeePanel = new EmployeePanel();
+        jTabbedPane1.add(employeePanel);
+        
         
     }
 
+    public EmployeePanel getEmployeePanel() {
+        return employeePanel;
+    }
+    
     public TimeKeeperPanel getTimeKeeperPanel() {
         return timeKeeperPanel;
     }
@@ -65,50 +65,12 @@ public class MainFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-<<<<<<< HEAD
+
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    new MainFrame().setVisible(true);
-                } catch (SQLException ex) {
-                    Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (ClassNotFoundException ex) {
-                    Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        });
-    }
 
-=======
->>>>>>> 73cebacf323fcde1a34cb276c9baebbae9dea718
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTabbedPane jTabbedPane1;
     // End of variables declaration//GEN-END:variables
