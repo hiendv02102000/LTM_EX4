@@ -16,6 +16,7 @@ public class LTM_EX3 {
      */
     public static void main(String[] args) {
         System.err.println("Hello world" + "hello work" + "wwww");
+        System.out.println("hiii");
     }
     
 }
