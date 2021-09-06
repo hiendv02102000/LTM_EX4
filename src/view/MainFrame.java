@@ -16,6 +16,7 @@ public class MainFrame extends javax.swing.JFrame {
      */
     public MainFrame() {
         initComponents();
+        setLocationRelativeTo(null);
         jTabbedPane1.add("Phòng ban", new DepartmentPanel());
         jTabbedPane1.add("Nhân viên", new EmployeePanel());
         jTabbedPane1.add("Thời gian làm", new TimeKeeperPanel());
@@ -80,6 +81,7 @@ public class MainFrame extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new MainFrame().setVisible(true);
+                
             }
         });
     }
