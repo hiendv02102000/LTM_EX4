@@ -5,9 +5,14 @@
  */
 package ltm_ex3;
 
+<<<<<<< HEAD
 import static controller.utils.MySQLConnUtils.getMySQLConnection;
 import java.sql.Connection;
 import java.sql.DriverManager;
+=======
+import dbconnection.MySQLConnUtils;
+import java.sql.Connection;
+>>>>>>> 0bcdd7489da0891cd5c141a9b80d0b09ebeaf8e6
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -18,8 +23,15 @@ import java.sql.Statement;
  */
 public class LTM_EX3 {
 
+    public static Connection getMyConnection() throws SQLException,
+            ClassNotFoundException {
+        return MySQLConnUtils.getMySQLConnection();
+    }
+
     /**
      * @param args the command line arguments
+     * @throws java.sql.SQLException
+     * @throws java.lang.ClassNotFoundException
      */
     public static void main(String[] args) throws SQLException {
         String host = "20.198.248.201";
@@ -46,5 +58,4 @@ public class LTM_EX3 {
         
         System.out.println("hiii");
     }
-    
 }
