@@ -5,8 +5,9 @@
  */
 package ltm_ex3;
 
+import dbconnection.MySQLConnUtils;
 import java.sql.Connection;
-import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -16,31 +17,30 @@ import java.sql.Statement;
  */
 public class LTM_EX3 {
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) throws SQLException {
-        String host = "20.198.248.201";
-        String dbName = "contactdb";
-        int port = 3306;
-        String mysqlURL = "jdbc:mysql://" + host + ":3306/" + dbName;
-
-        String username = "tmpuser";
-        String password = "tmpuser@123";
-
-        String dbClass = "com.mysql.jdbc.Driver";
-        try {
-            Class.forName(dbClass);
-        } catch (ClassNotFoundException cnfe) {
-            System.out.println("Error loading driver: " + cnfe);
-        }
-        Connection connection = (Connection) DriverManager.getConnection(mysqlURL, username, password);
-
-        Statement statement = connection.createStatement();
-        connection.close();
-        System.err.println("Hello world" + "hello work" + "wwww");
-
-        System.out.println("hiii");
+    public static Connection getMyConnection() throws SQLException,
+            ClassNotFoundException {
+        return MySQLConnUtils.getMySQLConnection();
     }
 
+    /**
+     * @param args the command line arguments
+     * @throws java.sql.SQLException
+     * @throws java.lang.ClassNotFoundException
+     */
+    public static void main(String[] args)
+            throws SQLException, ClassNotFoundException {
+
+        System.out.println("Get connection ... ");
+        Connection conn = LTM_EX3.getMyConnection();
+
+        Statement state = conn.createStatement();
+        ResultSet result = state.executeQuery("SELECT * FROM contactdb.EMPLOYEE");
+
+        while (result.next()) {
+            System.out.println(result.getString(1) + " "
+                    + result.getString(2) + " "
+                    + result.getString(3));
+        }
+        System.out.println("Done!");
+    }
 }
