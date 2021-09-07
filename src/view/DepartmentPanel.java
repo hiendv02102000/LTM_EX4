@@ -144,7 +144,7 @@ public class DepartmentPanel extends javax.swing.JPanel {
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         int i = jTable1.getSelectedRow();
-        Department d = 
+
     }//GEN-LAST:event_jTable1MouseClicked
 
     public void showtbl(ArrayList<Department> list) {
