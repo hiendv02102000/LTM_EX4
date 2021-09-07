@@ -60,5 +60,11 @@ public class Department implements Serializable {
 	public void setLocation(String location) {
 		this.location = location;
 	}
+        
+        public Object[] toObjects() {
+        return new Object[]{
+            deptId, deptName, deptNo, location
+        };
+    }
 
 }
