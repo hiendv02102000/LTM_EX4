@@ -19,9 +19,9 @@ public class MainFrame extends javax.swing.JFrame {
      */
 
     
-    private TimeKeeperPanel timeKeeperPanel;
-    private EmployeePanel employeePanel;
-    private DepartmentPanel departmentPanel;
+    private final TimeKeeperPanel timeKeeperPanel;
+    private final EmployeePanel employeePanel;
+    private final DepartmentPanel departmentPanel;
     public MainFrame() throws SQLException, ClassNotFoundException {
         initComponents();
         setLocationRelativeTo(null);

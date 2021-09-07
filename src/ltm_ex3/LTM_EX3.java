@@ -15,9 +15,6 @@ import java.util.logging.Logger;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.UnsupportedLookAndFeelException;
-import model.Department;
-import model.Employee;
-import model.Timekeeper;
 import view.MainFrame;
 
 public class LTM_EX3 {
@@ -30,17 +27,17 @@ public class LTM_EX3 {
                     break;
                 }
             }
-        } catch (ClassNotFoundException 
-                | InstantiationException 
-                | IllegalAccessException 
+        } catch (ClassNotFoundException
+                | InstantiationException
+                | IllegalAccessException
                 | UnsupportedLookAndFeelException ex) {
             Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         MainFrame frame = new MainFrame();
-        DepartmentControl department = new DepartmentControl(frame.getDepartmentPanell(), new ArrayList<Department>());
-        EmployeeControl empControl = new EmployeeControl(frame.getEmployeePanel(), new ArrayList<Employee>());
-        TimeKeeperControl control = new TimeKeeperControl(frame.getTimeKeeperPanel(), new ArrayList<Timekeeper>());
+        DepartmentControl department = new DepartmentControl(frame.getDepartmentPanell(), new ArrayList<>());
+        EmployeeControl empControl = new EmployeeControl(frame.getEmployeePanel(), new ArrayList<>());
+        TimeKeeperControl control = new TimeKeeperControl(frame.getTimeKeeperPanel(), new ArrayList<>());
         java.awt.EventQueue.invokeLater(() -> {
             frame.setVisible(true);
         });

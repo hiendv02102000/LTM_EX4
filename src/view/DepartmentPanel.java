@@ -8,7 +8,6 @@ package view;
 import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JTable;
-import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import model.Department;
 
@@ -22,7 +21,7 @@ public class DepartmentPanel extends javax.swing.JPanel {
      * Creates new form DepartmentPanel
      */
     
-    private DefaultTableModel model;
+    private final DefaultTableModel model;
     
     public DepartmentPanel() {
         initComponents();

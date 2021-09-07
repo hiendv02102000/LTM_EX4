@@ -7,9 +7,7 @@ package view;
 
 import java.math.BigInteger;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JTable;
@@ -25,7 +23,7 @@ public class EmployeePanel extends javax.swing.JPanel {
     /**
      * Creates new form Employee
      */
-    private DefaultTableModel model;
+    private final DefaultTableModel model;
     public EmployeePanel() throws SQLException, ClassNotFoundException {
         initComponents();
         model = (DefaultTableModel) jTable1.getModel();

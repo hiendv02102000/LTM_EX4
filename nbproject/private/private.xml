@@ -5,14 +5,20 @@
         <group>
             <file>file:/C:/Users/Ronin/Documents/LTM/LTM_EX4/src/view/EmployeePanel.java</file>
             <file>file:/C:/Users/Ronin/Documents/LTM/LTM_EX4/src/controller/TimeKeeperControl.java</file>
-            <file>file:/C:/Users/Ronin/Documents/LTM/LTM_EX4/src/controller/dao/IDAO.java</file>
             <file>file:/C:/Users/Ronin/Documents/LTM/LTM_EX4/src/view/MainFrame.java</file>
             <file>file:/C:/Users/Ronin/Documents/LTM/LTM_EX4/src/view/TimeKeeperPanel.java</file>
+            <file>file:/C:/Users/Ronin/Documents/LTM/LTM_EX4/src/view/DepartmentPanel.java</file>
+            <file>file:/C:/Users/Ronin/Documents/LTM/LTM_EX4/src/controller/utils/MySQLConnUtils.java</file>
+            <file>file:/C:/Users/Ronin/Documents/LTM/LTM_EX4/src/controller/DepartmentControl.java</file>
+            <file>file:/C:/Users/Ronin/Documents/LTM/LTM_EX4/src/model/Employee.java</file>
+            <file>file:/C:/Users/Ronin/Documents/LTM/LTM_EX4/src/controller/dao/IDAO.java</file>
+            <file>file:/C:/Users/Ronin/Documents/LTM/LTM_EX4/src/controller/EmployeeControl.java</file>
+            <file>file:/C:/Users/Ronin/Documents/LTM/LTM_EX4/src/model/Department.java</file>
             <file>file:/C:/Users/Ronin/Documents/LTM/LTM_EX4/src/model/Timekeeper.java</file>
             <file>file:/C:/Users/Ronin/Documents/LTM/LTM_EX4/src/controller/dao/DAOTimeKeeper.java</file>
-            <file>file:/C:/Users/Ronin/Documents/LTM/LTM_EX4/src/view/DepartmentPanel.java</file>
             <file>file:/C:/Users/Ronin/Documents/LTM/LTM_EX4/src/controller/dao/DAOEmployee.java</file>
             <file>file:/C:/Users/Ronin/Documents/LTM/LTM_EX4/src/ltm_ex3/LTM_EX3.java</file>
+            <file>file:/C:/Users/Ronin/Documents/LTM/LTM_EX4/src/controller/utils/ConnectionUtils.java</file>
         </group>
     </open-files>
 </project-private>
