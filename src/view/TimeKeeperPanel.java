@@ -5,7 +5,16 @@
  */
 package view;
 
+import java.math.BigInteger;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import model.Timekeeper;
 
 /**
  *
@@ -16,16 +25,73 @@ public class TimeKeeperPanel extends javax.swing.JPanel {
     /**
      * Creates new form TimeKeeperPanel
      */
+    private final DefaultTableModel model;
+    private final SimpleDateFormat format2 = new SimpleDateFormat("yyyy-MM-dd");
+
     public TimeKeeperPanel() {
         initComponents();
+        model = (DefaultTableModel) tbTimeKeeper.getModel();
     }
 
     public JButton getBtnAdd() {
         return btnAdd;
     }
-    
-    public void showList(String text) {
-        jLabel4.setText(text);
+
+    public void showList(ArrayList<Timekeeper> list) {
+        model.setRowCount(0);
+        for (Timekeeper tk : list) {
+            model.addRow(new Object[]{
+                tk.getEmpId(), tk.getDate_Time(),
+                tk.getIn_Out().equals("D") ? "Đi làm" : "Nghỉ",
+                tk.getTimekeeper_Id()
+            });
+        }
+    }
+
+    public Timekeeper getData() throws ParseException {
+        Timekeeper tk = new Timekeeper(
+                tfTimeKeeperId.getText(),
+                format2.parse(tfDate.getText()),
+                BigInteger.valueOf(Integer.parseInt(tfEmployeeId.getText())),
+                cbbInOut.getSelectedIndex() == 0 ? "D" : "V"
+        );
+        return tk;
+    }
+
+    public void showMessage(String msg) {
+        JOptionPane.showMessageDialog(this, msg);
+    }
+
+    public void clearForm() {
+        tfTimeKeeperId.setText("");
+        tfDate.setText("");
+    }
+
+    public void showSelectedRow() {
+        int index = tbTimeKeeper.getSelectedRow();
+        if (index == -1) {
+            return;
+        }
+        BigInteger imployeeId = (BigInteger) model.getValueAt(index, 0);
+        Date date = (Date) model.getValueAt(index, 1);
+        String inOut = (String) model.getValueAt(index, 2);
+        String tkId = (String) model.getValueAt(index, 3);
+        tfTimeKeeperId.setText(tkId);
+        cbbInOut.setSelectedIndex(inOut.equals("D") ? 0 : 1);
+        tfEmployeeId.setText(String.valueOf(imployeeId));
+        tfDate.setText(format2.format(date));
+    }
+
+    public JTable getTbTimeKeeper() {
+        return tbTimeKeeper;
+    }
+
+    public JButton getBtnDelete() {
+        return btnDelete;
+    }
+
+    public JButton getBtnEdit() {
+        return btnEdit;
     }
 
     /**
@@ -38,21 +104,25 @@ public class TimeKeeperPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tbTimeKeeper = new javax.swing.JTable();
         btnAdd = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btnEdit = new javax.swing.JButton();
+        btnDelete = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        tfEmployeeId = new javax.swing.JTextField();
+        tfDate = new javax.swing.JTextField();
+        tfTimeKeeperId = new javax.swing.JTextField();
+        cbbInOut = new javax.swing.JComboBox<>();
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tbTimeKeeper.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Mã nhân viên", "Ngày tháng", "Thời gian vào", "Thời gian ra"
+                "Mã nhân viên", "Ngày tháng", "Đi làm / Nghỉ", "Mã chấm công"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -63,27 +133,29 @@ public class TimeKeeperPanel extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setResizable(false);
-            jTable1.getColumnModel().getColumn(1).setResizable(false);
-            jTable1.getColumnModel().getColumn(2).setResizable(false);
-            jTable1.getColumnModel().getColumn(3).setResizable(false);
+        jScrollPane1.setViewportView(tbTimeKeeper);
+        if (tbTimeKeeper.getColumnModel().getColumnCount() > 0) {
+            tbTimeKeeper.getColumnModel().getColumn(0).setResizable(false);
+            tbTimeKeeper.getColumnModel().getColumn(1).setResizable(false);
+            tbTimeKeeper.getColumnModel().getColumn(2).setResizable(false);
+            tbTimeKeeper.getColumnModel().getColumn(3).setResizable(false);
         }
 
         btnAdd.setText("Thêm");
 
-        jButton2.setText("Sửa");
+        btnEdit.setText("Sửa");
 
-        jButton3.setText("Xóa");
+        btnDelete.setText("Xóa");
 
         jLabel1.setText("Mã nhân viên:");
 
         jLabel2.setText("Ngày tháng:");
 
-        jLabel3.setText("Thời gian vào:");
+        jLabel3.setText("Đi làm / Nghỉ:");
 
-        jLabel4.setText("Thời gian ra:");
+        jLabel4.setText("Mã chấm công:");
+
+        cbbInOut.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Đi làm", "Nghỉ" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -93,15 +165,25 @@ public class TimeKeeperPanel extends javax.swing.JPanel {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 625, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 192, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(18, 18, 18)
+                        .addComponent(tfEmployeeId))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4))
+                        .addGap(14, 14, 14)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cbbInOut, 0, 156, Short.MAX_VALUE)
+                            .addComponent(tfDate)
+                            .addComponent(tfTimeKeeperId))))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnAdd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnEdit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(24, 24, 24))
         );
         layout.setVerticalGroup(
@@ -111,17 +193,22 @@ public class TimeKeeperPanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAdd)
-                    .addComponent(jLabel1))
+                    .addComponent(jLabel1)
+                    .addComponent(tfEmployeeId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jLabel2))
+                    .addComponent(btnEdit)
+                    .addComponent(jLabel2)
+                    .addComponent(tfDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton3)
-                    .addComponent(jLabel3))
+                    .addComponent(btnDelete)
+                    .addComponent(jLabel3)
+                    .addComponent(cbbInOut, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jLabel4)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(tfTimeKeeperId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -129,13 +216,17 @@ public class TimeKeeperPanel extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton btnDelete;
+    private javax.swing.JButton btnEdit;
+    private javax.swing.JComboBox<String> cbbInOut;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tbTimeKeeper;
+    private javax.swing.JTextField tfDate;
+    private javax.swing.JTextField tfEmployeeId;
+    private javax.swing.JTextField tfTimeKeeperId;
     // End of variables declaration//GEN-END:variables
 }
