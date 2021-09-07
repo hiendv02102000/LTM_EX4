@@ -15,6 +15,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import javax.swing.JButton;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import model.Employee;
 
@@ -28,7 +29,7 @@ public class EmployeePanel extends javax.swing.JPanel {
      * Creates new form Employee
      */
     private DefaultTableModel model;
-    
+
     public EmployeePanel() throws SQLException, ClassNotFoundException {
         initComponents();
         model = (DefaultTableModel) jTable1.getModel();
@@ -62,6 +63,11 @@ public class EmployeePanel extends javax.swing.JPanel {
                 "No", "Name", "Job", "Salary"
             }
         ));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         no.setText("No");
@@ -105,13 +111,14 @@ public class EmployeePanel extends javax.swing.JPanel {
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton3)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(depID)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jButton1)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jButton2))))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jButton3)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(depID)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jButton1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButton2)))))
                 .addGap(0, 29, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -146,19 +153,31 @@ public class EmployeePanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    public void setDefault(List<Employee> list_Employee){
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTable1MouseClicked
+
+
+    public void setDefault(List<Employee> list_Employee) {
+        model.setRowCount(0);
         for (Employee employee : list_Employee) {
             model.addRow(employee.toObjects());
         }
     }
-    
-    public Employee getData(){
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");  
-        Date date = new Date();  
-        Employee e = new Employee(1, name.getText(), no.getText(), null, null, cv.getText(), Float.parseFloat(salary.getText()), Integer.valueOf(depID.getText()), BigInteger.valueOf(123));
+
+    public Employee getData() {
+        Employee e = new Employee(1, name.getText(), no.getText(), Calendar.getInstance().getTime(), null, cv.getText(), Float.parseFloat(salary.getText()), Integer.valueOf(depID.getText()), BigInteger.valueOf(0));
         return e;
     }
-    
+
+    public void setData(Employee e) {
+        no.setText(e.getEmpNo());
+        name.setText(e.getEmpName());
+        salary.setText("" + e.getSalary());
+        cv.setText(e.getJob());
+        depID.setText(e.getDeptId() + "");
+    }
+
     public JButton getjButton1() {
         return jButton1;
     }
@@ -171,8 +190,11 @@ public class EmployeePanel extends javax.swing.JPanel {
         return jButton3;
     }
 
-    
-    
+    public JTable getJTable() {
+        return jTable1;
+    }
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField cv;
     private javax.swing.JTextField depID;
@@ -186,5 +208,4 @@ public class EmployeePanel extends javax.swing.JPanel {
     private javax.swing.JTextField salary;
     // End of variables declaration//GEN-END:variables
 
-    
 }
