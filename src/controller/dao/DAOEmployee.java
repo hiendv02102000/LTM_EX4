@@ -89,8 +89,7 @@ public class DAOEmployee extends IDAO<Employee> {
 
 	@Override
 	public int insert(Employee e) {
-		String sql = "INSERT INTO EMPLOYEE (EMP_ID,"+
-				"EMP_NAME,"+
+		String sql = "INSERT INTO EMPLOYEE (EMP_NAME,"+
 				"EMP_NO,"+
 				"HIRE_DATE,"+
 				"IMAGE,"+
@@ -98,18 +97,17 @@ public class DAOEmployee extends IDAO<Employee> {
 				"SALARY,"+
 				"DEPT_ID,"+
 				"MNG_ID)"+
-				"VALUES (?,?,?,?,?,?,?,?,?)";
+				"VALUES (?,?,?,?,?,?,?,?)";
 		try {
 			this.preStatement = this.conn.prepareStatement(sql);
-			this.preStatement.setInt(1, e.getEmpId());
-			this.preStatement.setString(2, e.getEmpName());
-			this.preStatement.setString(3, e.getEmpNo());
-			this.preStatement.setDate(4, new java.sql.Date(e.getHireDate().getTime()));
-			this.preStatement.setBytes(5, e.getImage());
-			this.preStatement.setString(6, e.getJob());
-			this.preStatement.setFloat(7, e.getSalary());
-			this.preStatement.setInt(8, e.getDeptId());
-			this.preStatement.setLong(9, e.getMngId().longValue());
+			this.preStatement.setString(1, e.getEmpName());
+			this.preStatement.setString(2, e.getEmpNo());
+			this.preStatement.setDate(3, new java.sql.Date(e.getHireDate().getTime()));
+			this.preStatement.setBytes(4, e.getImage());
+			this.preStatement.setString(5, e.getJob());
+			this.preStatement.setFloat(6, e.getSalary());
+			this.preStatement.setInt(7, e.getDeptId());
+			this.preStatement.setLong(8, e.getMngId().longValue());
 			int rowCount=this.preStatement.executeUpdate();
 			
 			return rowCount;
@@ -154,7 +152,12 @@ public class DAOEmployee extends IDAO<Employee> {
 			
 		}
 	}
-
+        
+        public void delete(Employee e) throws SQLException{
+            String sql = "DELETE FROM EMPLOYEE WHERE EMP_ID = " + e.getEmpId();
+            statement.execute(sql);
+        }
+        
 	@Override
 	public void closeConnection() {
 		try {

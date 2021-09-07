@@ -8,6 +8,7 @@ package view;
 import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import model.Department;
 
@@ -143,8 +144,7 @@ public class DepartmentPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-        int i = jTable1.getSelectedRow();
-
+        
     }//GEN-LAST:event_jTable1MouseClicked
 
     public void showtbl(ArrayList<Department> list) {
@@ -170,6 +170,13 @@ public class DepartmentPanel extends javax.swing.JPanel {
         return d;
     }
     
+    public void setData(Department d){
+        jTextField1.setText(""+d.getDeptId());
+        jTextField1.disable();
+        jTextField2.setText(d.getDeptName());
+        jTextField3.setText(d.getDeptNo());
+        jTextField4.setText(d.getLocation());    
+    }
         
     public JTable getJTable(){
         return jTable1;

@@ -11,6 +11,10 @@ import java.awt.event.ActionEvent;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import model.Department;
 import view.DepartmentPanel;
 
@@ -40,6 +44,42 @@ public class DepartmentControl {
             dao.insert(d);
             view.addRow(d);
             //getAll();
+        });
+        
+        view.getjButton2().addActionListener((ActionEvent ae) -> {
+            try {
+                int r = view.getJTable().getSelectedRow();
+                Department d = models.get(r);
+                Department dd = view.getData();
+                d.setDeptName(dd.getDeptName());
+                d.setDeptNo(dd.getDeptNo());
+                d.setLocation(dd.getLocation());
+                dao.update(d);
+                getAll();
+            } catch (Exception e) {
+            }
+        });
+        view.getJTable().getSelectionModel().addListSelectionListener(new ListSelectionListener(){
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+               int r = view.getJTable().getSelectedRow();
+                if(r > 0){
+                    Department dd = models.get(r);
+                    view.setData(dd);
+                }
+            }
+           
+        });
+        view.getjButton3().addActionListener((ActionEvent ae) -> {
+            int r = view.getJTable().getSelectedRow();
+            Department d = models.get(r);
+            try {
+                dao.delete(d);
+            } catch (SQLException ex) {
+                Logger.getLogger(EmployeeControl.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            models.remove(r);
+            getAll();
         });
         
     }
