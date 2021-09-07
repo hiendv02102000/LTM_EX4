@@ -14,12 +14,12 @@ import javax.swing.event.ListSelectionListener;
 import model.Employee;
 import view.EmployeePanel;
 
-
 public class EmployeeControl {
+
     private EmployeePanel view;
     private ArrayList<Employee> models;
     private DAOEmployee dao;
-    
+
     public EmployeeControl(EmployeePanel view, ArrayList<Employee> models) {
         try {
             dao = new DAOEmployee(ConnectionUtils.getMyConnection());
@@ -53,19 +53,19 @@ public class EmployeeControl {
             } catch (Exception e) {
             }
         });
-        
+
         view.getJTable().getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {
                 int r = view.getJTable().getSelectedRow();
-                if(r > 0){
+                if (r > 0) {
                     Employee ee = models.get(r);
                     view.setData(ee);
                 }
-                
+
             }
         });
-        
+
         view.getjButton3().addActionListener((ActionEvent ae) -> {
             int r = view.getJTable().getSelectedRow();
             Employee e = models.get(r);
@@ -77,10 +77,9 @@ public class EmployeeControl {
             models.remove(r);
             getAll();
         });
-        
-        
+
     }
-    
+
     public void getAll() {
         models.clear();
         models.addAll(Arrays.asList(dao.selectAll()));

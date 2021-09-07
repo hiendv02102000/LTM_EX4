@@ -7,6 +7,7 @@ package controller.dao;
 
 import java.math.BigInteger;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.Vector;
 import model.Timekeeper;
@@ -55,22 +56,64 @@ public class DAOTimeKeeper extends IDAO<Timekeeper> {
 
     @Override
     public Timekeeper[] selectByName(String name) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public int insert(Timekeeper object) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public int insert(Timekeeper t) {
+        String sql = "INSERT INTO TIMEKEEPER("
+                + "Timekeeper_Id, Date_Time, In_Out, EMP_ID) VALUES(?,?,?,?)";
+        try {
+            this.preStatement = this.conn.prepareStatement(sql);
+            this.preStatement.setString(1, String.valueOf(t.getTimekeeper_Id()));
+            this.preStatement.setDate(2, new Date(t.getDate_Time().getTime()));
+            this.preStatement.setString(3, String.valueOf(t.getIn_Out()));
+            this.preStatement.setString(4, String.valueOf(t.getEmpId()));
+            int rowCount = this.preStatement.executeUpdate();;
+            return rowCount;
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());;
+            return 0;
+        }
     }
 
     @Override
-    public int update(Timekeeper object) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public int update(Timekeeper t) {
+        String sql = "UPDATE TIMEKEEPER SET "
+                + "Date_Time = ?, In_Out = ?, EMP_ID = ? WHERE Timekeeper_Id = ?";
+        try {
+            this.preStatement = this.conn.prepareStatement(sql);
+            this.preStatement.setString(4, String.valueOf(t.getTimekeeper_Id()));
+            this.preStatement.setDate(1, new Date(t.getDate_Time().getTime()));
+            this.preStatement.setString(2, String.valueOf(t.getIn_Out()));
+            this.preStatement.setString(3, String.valueOf(t.getEmpId()));
+            int rowCount = this.preStatement.executeUpdate();
+            return rowCount;
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+            return 0;
+        }
+    }
+
+    public int detete(Timekeeper t) {
+        String sql = "DELETE FROM TIMEKEEPER WHERE Timekeeper_Id = ?";
+        try {
+            this.preStatement = this.conn.prepareStatement(sql);
+            this.preStatement.setString(1, String.valueOf(t.getTimekeeper_Id()));
+            int rowCount = this.preStatement.executeUpdate();
+            return rowCount;
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+            return 0;
+        }
     }
 
     @Override
     public void closeConnection() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            this.conn.close();
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
     }
-
 }

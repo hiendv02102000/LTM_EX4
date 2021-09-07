@@ -119,6 +119,11 @@ public class DAODepartment extends IDAO<Department>{
 		}
     }
 
+    public void delete(Department d) throws SQLException{
+            String sql = "DELETE FROM DEPARTMENT WHERE DEPT_ID = " + d.getDeptId();
+            statement.execute(sql);
+    }
+    
     @Override
     public int update(Department d) {
         String sql = "UPDATE DEPARTMENT set "+
